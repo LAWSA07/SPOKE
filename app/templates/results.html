@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Results for "{{ query }}"</h1>
+        <div class="songs-grid">
+            {% for song in songs %}
+            <div class="song-card">
+                {% if song.image_url %}
+                <img src="{{ song.image_url }}" alt="{{ song.name }}">
+                {% endif %}
+                <h3>{{ song.name }}</h3>
+                <p>{{ song.artist }}</p>
+                <p>{{ song.album }}</p>
+                {% if song.preview_url %}
+                <audio controls>
+                    <source src="{{ song.preview_url }}" type="audio/mpeg">
+                </audio>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <a href="{{ url_for('index') }}" class="back-button">Back to Search</a>
+    </div>
+</body>
+</html> 
